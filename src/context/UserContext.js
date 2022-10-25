@@ -8,6 +8,7 @@ import {
   GithubAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
+  updateEmail,
 } from 'firebase/auth';
 import app from '../firebase/firebase.config';
 // Authentication Declaration
@@ -31,6 +32,11 @@ const UserContext = ({ children }) => {
       photoURL: photoUrl,
     });
   };
+  // User Email Update Function
+  const updateUserEmail = email => {
+    return updateEmail(auth.currentUser, email);
+  };
+
   // Login With Google Function
   const loginWithGoogle = () => {
     return signInWithPopup(auth, googleProvider);
@@ -43,6 +49,7 @@ const UserContext = ({ children }) => {
   const signInUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
+  // Delete User Account Function
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       // console.log(user);
@@ -58,6 +65,7 @@ const UserContext = ({ children }) => {
     signInUser,
     loginWithGoogle,
     loginWithGithub,
+    updateUserEmail,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

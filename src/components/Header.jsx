@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/UserContext';
 import { Link, NavLink } from 'react-router-dom';
-import { FaRegUserCircle, FaBars } from 'react-icons/fa';
+import { FaBars, FaUserCircle } from 'react-icons/fa';
 import { HiLightBulb, HiMoon } from 'react-icons/hi';
 /*
 Navigation color
@@ -116,17 +116,21 @@ const Header = () => {
             <div className="flex items-center">
               <div className="px-1">
                 <div className="">
-                  {user?.uid ? (
+                  {user?.photoURL ? (
                     <Link to="/profile">
                       <img
                         className=" rounded-full h-9 md:h-10 xl:h-11 w-9 md:w-10 xl:w-11"
                         src={user?.photoURL}
                         alt=""
+                        onError={e =>
+                          (e.currentTarget.src =
+                            'https://cdn-icons-png.flaticon.com/512/219/219983.png')
+                        }
                       />
                     </Link>
                   ) : user?.uid ? (
                     <Link to="/profile">
-                      <FaRegUserCircle className="h-6 md:h-8 w-6 md:w-8 p-1 hover:text-[#0071b3] text-[#575c5f] border-2 border-[#bcbebf] rounded-full" />
+                      <FaUserCircle className="h-9 md:h-12 w-9 md:w-12 hover:text-[#0071b3] text-[#575c5f] border-2 border-[#bcbebf] rounded-full" />
                     </Link>
                   ) : (
                     <Link

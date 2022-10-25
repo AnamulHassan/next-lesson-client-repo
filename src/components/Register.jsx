@@ -58,7 +58,7 @@ const Register = () => {
   };
   // Update User Profile Function
   const handleUserInfoUpdate = (name, photoURL) => {
-    updateUserProfile(name, photoURL)
+    updateUserProfile(name, photoURL, '', '')
       .then(() => {})
       .catch(error => setError(error.message));
   };
