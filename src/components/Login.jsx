@@ -24,9 +24,11 @@ btn bg #8cc63e
 */
 
 const Login = () => {
-  const { signInUser, setUser } = useContext(AuthContext);
+  const { signInUser, setUser, loginWithGoogle, loginWithGithub } =
+    useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
+  // Login With Email And Password Function
   const handleLogin = event => {
     event.preventDefault();
     const form = event.target;
@@ -40,10 +42,30 @@ const Login = () => {
       })
       .catch(error => setError(error.message));
   };
+  // Password Show And Hide Function
   const handleShowPass = () => {
     setShowPass(!showPass);
   };
-
+  // Login With Google Function
+  const handleLoginWithGoogle = () => {
+    loginWithGoogle()
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+  // Login With Github Function
+  const handleLoginWithGithub = () => {
+    loginWithGithub()
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   return (
     <section
       className="w-[95%] lg:full mx-auto mt-5 max-w-md p-4 rounded-md shadow sm:p-8  bg-[#f4f7fc]  text-[#1b4460
@@ -63,6 +85,7 @@ const Login = () => {
       </p>
       <div className="my-6 space-y-1">
         <button
+          onClick={handleLoginWithGoogle}
           aria-label="Login with Google"
           type="button"
           className="flex items-center justify-center w-full  py-1 space-x-4 border-2 rounded-md focus:ring-1 focus:ring-offset-1  
@@ -75,6 +98,7 @@ const Login = () => {
           </p>
         </button>
         <button
+          onClick={handleLoginWithGithub}
           aria-label="Login with GitHub"
           className="flex items-center justify-center w-full  py-1 space-x-4 border-2 rounded-md focus:ring-1 focus:ring-offset-1  
           border-[#f2f7fa]  bg-[#ffffff]

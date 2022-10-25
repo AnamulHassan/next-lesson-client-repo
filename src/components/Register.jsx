@@ -7,17 +7,25 @@ import { AuthContext } from '../context/UserContext';
 import { useContext } from 'react';
 
 const Register = () => {
-  const { createUser, updateUserProfile, setUser } = useContext(AuthContext);
+  const {
+    createUser,
+    updateUserProfile,
+    setUser,
+    loginWithGoogle,
+    loginWithGithub,
+  } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
-  const handleLogin = event => {
+  // Create User Function
+  const handleRegister = event => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+    const photoURL = form.photoUrl.value;
     const confirmPassword = form.confirmPassword.value;
     const fullName = form.firstName.value + ' ' + form.lastName.value;
-
+    // Condition for checking password
     if (!/(?=.*?[A-Z])/.test(password)) {
       setError('have at least one capital letter');
       return;
@@ -43,18 +51,40 @@ const Register = () => {
         console.log(result.user);
         setError('');
         form.reset();
-        handleUserInfoUpdate(fullName);
+        handleUserInfoUpdate(fullName, photoURL);
         setUser(result.user);
       })
       .catch(error => setError(error.message));
   };
-  const handleUserInfoUpdate = name => {
-    updateUserProfile(name)
+  // Update User Profile Function
+  const handleUserInfoUpdate = (name, photoURL) => {
+    updateUserProfile(name, photoURL)
       .then(() => {})
       .catch(error => setError(error.message));
   };
+  // Password Show Or Hide Function
   const handleShowPass = () => {
     setShowPass(!showPass);
+  };
+  // Login With Google Function
+  const handleLoginWithGoogle = () => {
+    loginWithGoogle()
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+  // Login With Github Function
+  const handleLoginWithGithub = () => {
+    loginWithGithub()
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
   return (
     <section
@@ -74,6 +104,7 @@ const Register = () => {
       </p>
       <div className="my-6 space-y-1">
         <button
+          onClick={handleLoginWithGoogle}
           aria-label="Login with Google"
           type="button"
           className="flex items-center justify-center w-full  py-1 space-x-4 border-2 rounded-md focus:ring-1 focus:ring-offset-1  
@@ -86,6 +117,7 @@ const Register = () => {
           </p>
         </button>
         <button
+          onClick={handleLoginWithGithub}
           aria-label="Login with GitHub"
           className="flex items-center justify-center w-full  py-1 space-x-4 border-2 rounded-md focus:ring-1 focus:ring-offset-1  
           border-[#f2f7fa]  bg-[#ffffff]
@@ -102,7 +134,7 @@ const Register = () => {
           OR
         </p>
       </div>
-      <Form onSubmit={handleLogin}>
+      <Form onSubmit={handleRegister}>
         <div className="space-y-1">
           <div className="w-full flex justify-between">
             <div className="space-y-1">

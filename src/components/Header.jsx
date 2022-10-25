@@ -118,7 +118,11 @@ const Header = () => {
                 <div className="">
                   {user?.uid ? (
                     <Link to="/profile">
-                      <img src={user?.photoURL} alt="" />
+                      <img
+                        className=" rounded-full h-9 md:h-10 xl:h-11 w-9 md:w-10 xl:w-11"
+                        src={user?.photoURL}
+                        alt=""
+                      />
                     </Link>
                   ) : user?.uid ? (
                     <Link to="/profile">
