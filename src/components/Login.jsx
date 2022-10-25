@@ -4,24 +4,7 @@ import { FaEye, FaEyeSlash, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { AuthContext } from '../context/UserContext';
-/*
-Navigation color
---------------------------------------
-logo: #575c5f 
-text : #28374a
-login: #27aae2
-bg: #ffffff
-
--------------------------------
-header text:  #ffffff
-hero bg: #1b4460 
-common bg 2 : #f4f7fc 
-common text: #28374a 
-bg up : #f2f7fa  
-button bg: #0071b3   
-button text: #ffffff
-btn bg #8cc63e 
-*/
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const { signInUser, setUser, loginWithGoogle, loginWithGithub } =
@@ -37,7 +20,18 @@ const Login = () => {
     console.log(email, password);
     signInUser(email, password)
       .then(result => {
-        console.log(result.user);
+        toast(`Welcome back, ${result?.user?.displayName}`, {
+          icon: '👏',
+          duration: 4000,
+          style: {
+            border: '2px solid #51cf66',
+            padding: '16px',
+            color: '#000',
+            textAlign: 'center',
+            fontSize: '20px',
+            backgroundColor: '#f4f7fc',
+          },
+        });
         setUser(result.user);
       })
       .catch(error => setError(error.message));
@@ -49,22 +43,14 @@ const Login = () => {
   // Login With Google Function
   const handleLoginWithGoogle = () => {
     loginWithGoogle()
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(result => setUser(result.user))
+      .catch(error => setError(error.message));
   };
   // Login With Github Function
   const handleLoginWithGithub = () => {
     loginWithGithub()
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(result => setUser(result.user))
+      .catch(error => setError(error.message));
   };
   return (
     <section

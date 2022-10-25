@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { AuthContext } from '../context/UserContext';
 import { useContext } from 'react';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const {
@@ -13,6 +14,7 @@ const Register = () => {
     setUser,
     loginWithGoogle,
     loginWithGithub,
+    verifyAccount,
   } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
@@ -50,6 +52,7 @@ const Register = () => {
       .then(result => {
         console.log(result.user);
         setError('');
+        handleVerificationAccount();
         form.reset();
         handleUserInfoUpdate(fullName, photoURL);
         setUser(result.user);
@@ -69,22 +72,32 @@ const Register = () => {
   // Login With Google Function
   const handleLoginWithGoogle = () => {
     loginWithGoogle()
-      .then(result => {
-        console.log(result);
+      .then(result => setUser(result.user))
+      .catch(error => setError(error.message));
+  };
+  // Account Verification
+  const handleVerificationAccount = () => {
+    verifyAccount()
+      .then(() => {
+        toast('Please check your email to verify your account', {
+          duration: 5000,
+          style: {
+            border: '2px solid #adb5bd',
+            padding: '16px',
+            color: '#000',
+            textAlign: 'center',
+            fontSize: '20px',
+            backgroundColor: '#f4f7fc',
+          },
+        });
       })
-      .catch(error => {
-        console.error(error);
-      });
+      .catch(error => setError(error.message));
   };
   // Login With Github Function
   const handleLoginWithGithub = () => {
     loginWithGithub()
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(result => setUser(result.user))
+      .catch(error => setError(error.message));
   };
   return (
     <section

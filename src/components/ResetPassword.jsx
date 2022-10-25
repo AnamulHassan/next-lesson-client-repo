@@ -1,11 +1,31 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { Form, Link } from 'react-router-dom';
+import { AuthContext } from '../context/UserContext';
 
 const ResetPassword = () => {
   const [error, setError] = useState('');
+  const { resetUserPassword } = useContext(AuthContext);
   const handleResetPassword = event => {
-    console.log(event);
+    const email = event.target.email.value;
+    resetUserPassword(email)
+      .then(() => {
+        toast('Please check your email to reset your password', {
+          duration: 5000,
+          style: {
+            border: '3px solid #adb5bd',
+            padding: '16px',
+            color: '#000',
+            textAlign: 'center',
+            fontSize: '20px',
+            backgroundColor: '#f4f7fc',
+          },
+        });
+      })
+      .catch(error => {
+        setError(error.message);
+      });
   };
   return (
     <section

@@ -4,6 +4,7 @@ import { FaShieldAlt, FaUserCircle } from 'react-icons/fa';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Form } from 'react-router-dom';
+import toast from 'react-hot-toast';
 /*
 Navigation color
 --------------------------------------
@@ -30,6 +31,7 @@ const Profile = () => {
     deleteUserAccount,
     logoutUser,
   } = useContext(AuthContext);
+  const [error, setError] = useState('');
   const [date, setDate] = useState(null);
   const handleChangeInfo = event => {
     event.preventDefault();
@@ -37,39 +39,53 @@ const Profile = () => {
     const fullName = form.firstName.value + ' ' + form.lastName.value;
     const email = form.email.value;
     const photoUrl = form.photoUrl.value;
-    const contactNumber = form.contactNumber.value;
+    // const contactNumber = form.contactNumber.value;
     updateUserProfile(fullName, photoUrl)
-      .then(result => {
-        console.log(result);
+      .then(() => {
+        toast.success('Your information is updated', {
+          duration: 4000,
+          style: {
+            border: '2px solid #51cf66',
+            padding: '16px',
+            color: '#000',
+            textAlign: 'center',
+            fontSize: '20px',
+            backgroundColor: '#f4f7fc',
+          },
+        });
       })
-      .catch(error => {
-        console.error(error);
-      });
+      .catch(error => setError(error.message));
     updateUserEmail(email)
       .then(() => {})
-      .catch(error => {
-        console.error(error);
-      });
+      .catch(error => setError(error.message));
   };
   const handleDeleteUser = () => {
     deleteUserAccount()
-      .then(() => {})
-      .catch(error => {
-        console.error(error);
-      });
+      .then(() => {
+        toast.error('Your account is permanently deleted', {
+          duration: 4000,
+          style: {
+            border: '2px solid #e03131',
+            padding: '16px',
+            color: '#000',
+            textAlign: 'center',
+            fontSize: '20px',
+            backgroundColor: '#f4f7fc',
+          },
+        });
+      })
+      .catch(error => setError(error.message));
   };
   const handleLogoutUser = () => {
     logoutUser()
       .then(() => {})
-      .catch(error => {
-        console.error(error);
-      });
+      .catch(error => setError(error.message));
   };
   console.log(user);
   return (
-    <section className="w-4/5 mx-auto border-2 rounded-xl  my-8">
-      <div className="bg-[#f4f7fc] flex">
-        <div className="bg-[#ffffff] w-[30%] flex flex-col ">
+    <section className="w-[90%] lg:w-4/5 mx-auto border-2 rounded-xl  my-8">
+      <div className="bg-[#f4f7fc] flex flex-col lg:flex-row ">
+        <div className="bg-[#ffffff] w-full  lg:w-[30%] flex flex-col ">
           <div className="flex justify-center my-4">
             {user?.photoURL ? (
               <img
@@ -100,31 +116,34 @@ const Profile = () => {
             </h2>
             <button
               onClick={handleDeleteUser}
-              className="bg-[#be4d25] font-semibold text-lg py-1 mt-4 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#2596be]"
+              className="bg-[#e03131] mb-8 lg:mb-0 font-semibold text-lg py-1 mt-4 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#c92a2a]"
             >
               Delete Account
             </button>
           </div>
         </div>
-        <div className="w-[70%] px-8 py-10">
-          <div className="flex">
-            <div className="w-[20%]  flex items-center justify-center">
+        <div className="w-full lg:w-[70%] px-4 lg:px-8  py-6 lg:py-10">
+          <div className="flex flex-col lg:flex-row ">
+            <div className="w-full lg:w-[20%] mb-5 lg:mb-0  flex flex-col lg:flex-row items-center justify-center">
               <span className="bg-[#ffffff] p-5 border-2 rounded-full">
-                <FaShieldAlt className="h-20 w-20 text-[#27aae2] " />
+                <FaShieldAlt className="h-20 w-20 text-[#a9ddf3] " />
               </span>
             </div>
-            <div className="w-[80%] text-[#575c5f]">
-              <h2 className="text-4xl font-semibold mb-2">
+            <div className="w-full lg:w-[80%] text-[#575c5f]">
+              <h2 className="text-2xl lg:text-4xl font-semibold mb-2">
                 Personal Information
               </h2>
-              <p className="text-md font-semibold ">
+              <p className="text-sm lg:text-md font-semibold ">
                 When you use our services, you&#39;re trusting us with your
                 information. We understand this is a big responsibility and work
                 hard to protect your information and put you in control.
               </p>
             </div>
           </div>
-          <Form onSubmit={handleChangeInfo} className="mt-8 w-[80%] mx-auto">
+          <Form
+            onSubmit={handleChangeInfo}
+            className="mt-8 w-full lg:w-[80%] mx-auto"
+          >
             <div className="w-full flex justify-between">
               <div className="space-y-1 w-full">
                 <label
@@ -233,6 +252,13 @@ const Profile = () => {
                 maxDate={new Date()}
               />
             </div>
+            <p
+              className={`${
+                error ? 'block' : 'hidden'
+              } mb-[-24px] text-center text-md font-semibold text-[#e15a51]`}
+            >
+              {error}
+            </p>
             <input
               type="submit"
               value="Save Change"

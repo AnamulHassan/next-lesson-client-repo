@@ -12,6 +12,7 @@ import {
   deleteUser,
   signOut,
   sendPasswordResetEmail,
+  sendEmailVerification,
 } from 'firebase/auth';
 import app from '../firebase/firebase.config';
 // Authentication Declaration
@@ -64,6 +65,10 @@ const UserContext = ({ children }) => {
   const resetUserPassword = email => {
     return sendPasswordResetEmail(auth, email);
   };
+  // Email Verification Function
+  const verifyAccount = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       // console.log(user);
@@ -83,6 +88,7 @@ const UserContext = ({ children }) => {
     deleteUserAccount,
     logoutUser,
     resetUserPassword,
+    verifyAccount,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
