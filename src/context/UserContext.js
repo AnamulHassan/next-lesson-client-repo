@@ -9,6 +9,9 @@ import {
   signInWithPopup,
   onAuthStateChanged,
   updateEmail,
+  deleteUser,
+  signOut,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import app from '../firebase/firebase.config';
 // Authentication Declaration
@@ -50,6 +53,17 @@ const UserContext = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
   // Delete User Account Function
+  const deleteUserAccount = () => {
+    return deleteUser(auth.currentUser);
+  };
+  // Logout User Function
+  const logoutUser = () => {
+    return signOut(auth);
+  };
+  // Reset User Password Function
+  const resetUserPassword = email => {
+    return sendPasswordResetEmail(auth, email);
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       // console.log(user);
@@ -66,6 +80,9 @@ const UserContext = ({ children }) => {
     loginWithGoogle,
     loginWithGithub,
     updateUserEmail,
+    deleteUserAccount,
+    logoutUser,
+    resetUserPassword,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

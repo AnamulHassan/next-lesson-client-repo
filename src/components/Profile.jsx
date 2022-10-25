@@ -23,7 +23,13 @@ button text: #ffffff
 btn bg #8cc63e 
 */
 const Profile = () => {
-  const { user, updateUserProfile, updateUserEmail } = useContext(AuthContext);
+  const {
+    user,
+    updateUserProfile,
+    updateUserEmail,
+    deleteUserAccount,
+    logoutUser,
+  } = useContext(AuthContext);
   const [date, setDate] = useState(null);
   const handleChangeInfo = event => {
     event.preventDefault();
@@ -40,6 +46,20 @@ const Profile = () => {
         console.error(error);
       });
     updateUserEmail(email)
+      .then(() => {})
+      .catch(error => {
+        console.error(error);
+      });
+  };
+  const handleDeleteUser = () => {
+    deleteUserAccount()
+      .then(() => {})
+      .catch(error => {
+        console.error(error);
+      });
+  };
+  const handleLogoutUser = () => {
+    logoutUser()
       .then(() => {})
       .catch(error => {
         console.error(error);
@@ -69,13 +89,19 @@ const Profile = () => {
             {user?.displayName === ' ' ? 'Unknown User' : user?.displayName}
           </h2>
           <div className="flex flex-col items-center px-8">
-            <button className="bg-[#1b4460] font-semibold text-xl py-4 mt-12 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#0071b3]">
+            <button
+              onClick={handleLogoutUser}
+              className="bg-[#1b4460] font-semibold text-xl py-4 mt-12 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#0071b3]"
+            >
               Logout
             </button>
             <h2 className="text-lg font-semibold text-center leading-5 mt-8">
               Are you sure to delete your account?
             </h2>
-            <button className="bg-[#be4d25] font-semibold text-lg py-1 mt-4 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#2596be]">
+            <button
+              onClick={handleDeleteUser}
+              className="bg-[#be4d25] font-semibold text-lg py-1 mt-4 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#2596be]"
+            >
               Delete Account
             </button>
           </div>
