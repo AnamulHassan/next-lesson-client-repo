@@ -1,6 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/UserContext';
 import { FaShieldAlt } from 'react-icons/fa';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { Form } from 'react-router-dom';
 /*
 Navigation color
 --------------------------------------
@@ -21,9 +24,21 @@ btn bg #8cc63e
 */
 const Profile = () => {
   const { user } = useContext(AuthContext);
+  const [date, setDate] = useState(null);
+  const handleChangeInfo = event => {
+    event.preventDefault();
+    const form = event.value;
+    // const fullName = form.firstName.value + form.lastName.value;
+    const photoUrl = form?.photo.value;
+    const contactNumber = form?.contact.value;
+
+    // console.log(fullName);
+    console.log(photoUrl);
+    console.log(contactNumber);
+  };
   return (
     <section className="w-4/5 mx-auto border-2 rounded-xl  mt-10">
-      <div className="bg-[#f4f7fc] flex">
+      <Form onSubmit={handleChangeInfo} className="bg-[#f4f7fc] flex">
         <div className="bg-[#ffffff] w-[30%]">
           <div className="flex justify-center my-4">
             <img
@@ -116,7 +131,7 @@ const Profile = () => {
               <input
                 type="text"
                 id="photoUrl"
-                name="photoUrl"
+                name="photo"
                 className="w-full px-3 py-1 border-8 rounded-md text-md font-semibold  border-[#f4f7fc]  bg-[#ffffff]  outline-none"
                 placeholder={user?.photoURL}
               />
@@ -131,14 +146,35 @@ const Profile = () => {
               <input
                 type="number"
                 id="contact-number"
-                name="contactNumber"
+                name="contact"
                 className="w-full px-3 py-1 border-8 rounded-md text-md font-semibold  border-[#f4f7fc]  bg-[#ffffff]  outline-none"
                 placeholder="+088000000000"
               />
             </div>
+            <div>
+              <label
+                className="block ml-5 mb-[-4px] text-lg font-semibold"
+                htmlFor="contact-number"
+              >
+                Your Birth Date
+              </label>
+              <DatePicker
+                className="w-full px-3 py-1 border-8 rounded-md text-md font-semibold  border-[#f4f7fc]  bg-[#ffffff]  outline-none"
+                selected={date}
+                onChange={date => setDate(date)}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Day/Month/Year"
+                maxDate={new Date()}
+              />
+            </div>
+            <input
+              type="submit"
+              value="Save Change"
+              className=" mt-7 px-8 py-1 select-none font-semibold rounded-md cursor-pointer bg-[#27aae2] text-xl  text-[#f4f7fc]  duration-300 hover:bg-[#0071b3]"
+            />
           </div>
         </div>
-      </div>
+      </Form>
     </section>
   );
 };
