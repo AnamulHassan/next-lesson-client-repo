@@ -23,6 +23,10 @@ const githubProvider = new GithubAuthProvider();
 // Context Declaration
 export const AuthContext = createContext({});
 const UserContext = ({ children }) => {
+  // State for Category Data
+  const [courseCategory, setCourseCategory] = useState([]);
+  // State for Category Id
+  const [categoryId, setCategoryId] = useState('');
   // State For Set User
   const [user, setUser] = useState(null);
   // Create New Account Function
@@ -76,6 +80,11 @@ const UserContext = ({ children }) => {
     });
     return () => unsubscribe();
   }, []);
+  useEffect(() => {
+    fetch('http://localhost:5000/category')
+      .then(response => response.json())
+      .then(data => setCourseCategory(data));
+  }, []);
   const userInfo = {
     user,
     createUser,
@@ -89,6 +98,9 @@ const UserContext = ({ children }) => {
     logoutUser,
     resetUserPassword,
     verifyAccount,
+    courseCategory,
+    categoryId,
+    setCategoryId,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

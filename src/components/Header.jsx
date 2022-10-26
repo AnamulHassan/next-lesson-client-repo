@@ -122,6 +122,7 @@ const Header = () => {
                         className=" rounded-full h-9 md:h-10 xl:h-11 w-9 md:w-10 xl:w-11"
                         src={user?.photoURL}
                         alt=""
+                        title={user?.displayName}
                         onError={e =>
                           (e.currentTarget.src =
                             'https://cdn-icons-png.flaticon.com/512/219/219983.png')
