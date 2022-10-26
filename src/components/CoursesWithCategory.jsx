@@ -31,7 +31,7 @@ const CoursesWithCategory = () => {
           <CourseView key={course.id} courseData={course}></CourseView>
         ))}
       </div>
-      <div className=" left-0 top-0 translate-y-[90%] fixed flex lg:hidden  items-center justify-center  text-gray-300 h-16 w-12 z-50 rounded-lg ">
+      <div className=" left-0 top-0 translate-y-[90%] fixed flex lg:hidden  items-center justify-center  text-gray-400 h-16 w-12 z-50 rounded-lg ">
         <button className="duration-300" onClick={handleNavigateCategory}>
           {open ? (
             <HiChevronDoubleRight className="text-4xl duration-300 leading-2" />
