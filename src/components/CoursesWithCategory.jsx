@@ -1,26 +1,31 @@
 import React, { useContext } from 'react';
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/UserContext';
 import CourseCategory from './CourseCategory';
 import CourseView from './CourseView';
 
-const Courses = () => {
+const CoursesWithCategory = () => {
   const { open, setOpen } = useContext(AuthContext);
   const allCategoryData = useLoaderData();
+  const location = useLocation();
   const handleNavigateCategory = () => setOpen(!open);
   return (
     <section className="w-[85%] lg:w-[95%] mt-12 mx-auto flex">
       <div
         className={`w-4/5 lg:w-[25%] z-50 duration-500 fixed lg:static left-2/4 top-2/4 ${
-          open ? 'translate-x-[-350%] scale-[10%]' : 'translate-x-[-50%]'
+          open
+            ? 'translate-x-[-350%] scale-[10%] lg:scale-100'
+            : 'translate-x-[-50%]'
         } translate-y-[-50%] lg:translate-x-0 lg:translate-y-0`}
       >
-        <CourseCategory activeBtn={'07'}></CourseCategory>
+        <CourseCategory
+          activeBtn={location.pathname.split('/')[2]}
+        ></CourseCategory>
       </div>
       <div
         className="w-full lg:w-[75%] ml-0 lg:ml-8 
-      grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 duration-300 gap-x-6 gap-y-8"
+        grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 duration-300 gap-x-6 gap-y-8"
       >
         {allCategoryData.map(course => (
           <CourseView key={course.id} courseData={course}></CourseView>
@@ -39,4 +44,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default CoursesWithCategory;

@@ -29,6 +29,8 @@ const UserContext = ({ children }) => {
   const [categoryId, setCategoryId] = useState('');
   // State For Set User
   const [user, setUser] = useState(null);
+  // State For Category Navigate
+  const [open, setOpen] = useState(false);
   // Create New Account Function
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -101,6 +103,8 @@ const UserContext = ({ children }) => {
     courseCategory,
     categoryId,
     setCategoryId,
+    open,
+    setOpen,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
