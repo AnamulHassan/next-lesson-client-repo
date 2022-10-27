@@ -3,7 +3,7 @@ import { AuthContext } from '../context/UserContext';
 import { FaShieldAlt, FaUserCircle } from 'react-icons/fa';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Form, useNavigate } from 'react-router-dom';
+import { Form, Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 /*
 Navigation color
@@ -108,19 +108,33 @@ const Profile = () => {
           <h2 className="text-3xl font-semibold text-center">
             {user?.displayName === ' ' ? 'Unknown User' : user?.displayName}
           </h2>
-          <div className="flex flex-col items-center px-8">
+          <div className="flex mt-8 flex-col items-center px-4 space-y-2">
+            <Link
+              className="w-full font-bold text-[#868e96] duration-200
+          hover:text-[#1b4460] text-center  rounded-lg text-xl py-4 bg-[#f1f3f5]"
+            >
+              Your Courses
+            </Link>
+            <Link
+              className="w-full font-bold text-[#868e96] duration-200
+          hover:text-[#1b4460] text-center  rounded-lg text-xl py-4 bg-[#f1f3f5]"
+            >
+              Get Certificate
+            </Link>
+
             <button
               onClick={handleLogoutUser}
-              className="bg-[#1b4460] font-semibold text-xl py-4 mt-12 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#0071b3]"
+              className="w-full font-bold text-[#868e96] duration-200
+          hover:text-[#1b4460] text-center  rounded-lg text-xl py-4 bg-[#f1f3f5]"
             >
               Logout
             </button>
-            <h2 className="text-lg font-semibold text-center leading-5 mt-8">
+            <h2 className="text-lg pt-8 font-semibold text-center leading-5 ">
               Are you sure to delete your account?
             </h2>
             <button
               onClick={handleDeleteUser}
-              className="bg-[#e03131] mb-8 lg:mb-0 font-semibold text-lg py-1 mt-4 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#c92a2a]"
+              className="bg-[#e03131] mb-4 lg:mb-0 font-semibold text-lg py-1 mt-4 w-[60%]  select-none  rounded-md cursor-pointer text-[#f4f7fc] duration-300 hover:bg-[#c92a2a]"
             >
               Delete Account
             </button>

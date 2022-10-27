@@ -9,7 +9,7 @@ import FAQ from '../components/FAQ';
 import Home from '../components/Home';
 import Login from '../components/Login';
 import Premium from '../components/Premium';
-import PremiumAccess from '../components/PremiumAccess';
+import PremiumAccess from '../components/CheckOut';
 import Profile from '../components/Profile';
 import Register from '../components/Register';
 import ResetPassword from '../components/ResetPassword';

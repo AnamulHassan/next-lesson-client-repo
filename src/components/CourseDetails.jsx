@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import underlineDark from '../asset/underline-gray.png';
-
+import Pdf from 'react-to-pdf';
+const ref = React.createRef();
 const CourseDetails = () => {
   const courseInfo = useLoaderData();
   const {

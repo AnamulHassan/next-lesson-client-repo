@@ -63,7 +63,9 @@ const CourseView = ({ courseData }) => {
         <div className="px-3">
           <h2 className="text-xl text-[#212529] font-bold">{courseTitle}</h2>
           <p className="text-md font-semibold text-[#868e96]">
-            {atAGlance?.Institution}
+            {atAGlance?.Institution
+              ? atAGlance.Institution
+              : 'Institution not found'}
           </p>
         </div>
         <Link
