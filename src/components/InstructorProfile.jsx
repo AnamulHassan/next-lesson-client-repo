@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/UserContext';
 
 const InstructorProfile = ({ instructorData }) => {
   const { name, photoUrl, institute } = instructorData;
-  // console.log(instructorData);
+  const { dark } = useContext(AuthContext);
   return (
     <div
       style={{
         fontFamily: "'Nunito', sans-serif",
       }}
-      className=" flex bg-[#f1f3f5] rounded-md justify-start py-3 px-4 items-center flex-col"
+      className={`flex ${
+        dark ? 'bg-[#495057] text-[#e9ecef]' : 'bg-[#f1f3f5]'
+      } rounded-md justify-start py-3 px-4 items-center flex-col`}
     >
       <img
         className="w-[40%] rounded-full "

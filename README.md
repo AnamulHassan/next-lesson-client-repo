@@ -23,4 +23,4 @@ We made this project to sell some online courses. Making this course I had plann
 - ImgBB
 - ImgPile
 - React date picker
-- express js
+- Express js

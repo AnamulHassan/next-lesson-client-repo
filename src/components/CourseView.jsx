@@ -1,37 +1,21 @@
-import { click } from '@testing-library/user-event/dist/click';
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import { Link, useLoaderData } from 'react-router-dom';
-import Courses from './Courses';
-
-/*
-Navigation color
---------------------------------------
-logo: #575c5f 
-text : #28374a
-login: #27aae2
-bg: #ffffff
-
--------------------------------
-header text:  #ffffff
-hero bg: #1b4460 
-common bg 2 : #f4f7fc 
-common text: #28374a 
-bg up : #f2f7fa  
-button bg: #0071b3   
-button text: #ffffff
-btn bg #8cc63e 
-
-border: #ced4da
-*/
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/UserContext';
 const CourseView = ({ courseData }) => {
-  // console.log(courseData);
+  const { dark } = useContext(AuthContext);
   const { courseTitle, thumbnailUrl, id, courseStatus, atAGlance } = courseData;
   return (
-    <div className="border-2 border-[#f1f3f5] rounded-lg">
+    <div
+      className={`border-2  rounded-lg ${
+        dark ? 'bg-[#343a40] border-[#868e96]' : 'bg-white border-[#f1f3f5]'
+      }`}
+    >
       <div className="relative mb-6">
         <img
-          className="w-full rounded-t-md bg-[#ced4da]"
+          className={`w-full rounded-t-md ${
+            dark ? 'bg-[#343a40]' : 'bg-[#ced4da]'
+          }`}
           src={
             thumbnailUrl
               ? thumbnailUrl
@@ -61,7 +45,13 @@ const CourseView = ({ courseData }) => {
         className="flex justify-between flex-col min-h-[200px]"
       >
         <div className="px-3">
-          <h2 className="text-xl text-[#212529] font-bold">{courseTitle}</h2>
+          <h2
+            className={`text-xl ${
+              dark ? 'text-[#e9ecef]' : 'text-[#212529]'
+            } font-bold`}
+          >
+            {courseTitle}
+          </h2>
           <p className="text-md font-semibold text-[#868e96]">
             {atAGlance?.Institution
               ? atAGlance.Institution
@@ -70,7 +60,11 @@ const CourseView = ({ courseData }) => {
         </div>
         <Link
           to={`../../courses/${id}`}
-          className="border-t-2 h-[50px] rounded-b-lg bg-[#f1f3f5] flex items-center text-[#868e96] justify-between px-8 duration-200 hover:text-[#1b4460]"
+          className={`border-t-2 h-[50px] rounded-b-lg ${
+            dark
+              ? 'bg-[#495057] text-[#e9ecef] hover:text-[#dee2e6]'
+              : 'bg-[#f1f3f5] text-[#868e96] hover:text-[#1b4460]'
+          }  flex items-center justify-between px-8 duration-200 `}
         >
           <p className="text-xl font-bold ">See more</p>{' '}
           <FaExternalLinkAlt className="text-xl" />

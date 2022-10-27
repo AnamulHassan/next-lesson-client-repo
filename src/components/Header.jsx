@@ -5,40 +5,52 @@ import { FaBars, FaUserCircle } from 'react-icons/fa';
 import { HiLightBulb, HiMoon } from 'react-icons/hi';
 import { Tooltip } from '@material-tailwind/react';
 import logo from '../asset/brand-logo.png';
+import logoWhite from '../asset/brand-logo-white.png';
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, dark, setDark } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(false);
+
   const handleOpenNav = () => {
     setOpen(!open);
   };
   const handleDarkMode = () => {
     setDark(!dark);
   };
-  // console.log(open);
   return (
     <header>
-      <nav className=" bg-[#ffffff] w-full flex relative justify-between items-center mx-auto px-8 h-20">
+      <nav
+        className={`${
+          dark ? 'bg-[#343a40]' : 'bg-[#ffffff]'
+        } w-full flex relative justify-between items-center mx-auto px-8 h-20`}
+      >
         <div className="">
           <Link className="" to="/">
             <div className="block">
-              <img className="h-10 lg:12 xl:14" src={logo} alt="" />
+              <img
+                className="h-10 lg:12 xl:14"
+                src={`${dark ? logoWhite : logo}`}
+                alt=""
+              />
             </div>
           </Link>
         </div>
         <div
-          className={`flex flex-col lg:flex-row lg:justify-center left-2/4 lg:left-0 bg-[#f4f7fc] lg:bg-transparent ${
+          className={`flex flex-col lg:flex-row lg:justify-center left-2/4 lg:left-0 ${
+            dark ? 'bg-[#343a40]' : 'bg-[#f4f7fc]'
+          } lg:bg-transparent ${
             open
               ? 'top-[300%] py-8 w-4/5 mx-auto'
               : 'top-[-200%] w-2 blur-3xl lg:blur-0'
-          }  lg:top-0 translate-x-[-50%] lg:translate-x-0 translate-y-[-50%] lg:translate-y-0 absolute lg:static z-50 items-center text-xl font-semibold  rounded-full duration-500 text-[#575c5f]`}
+          }  lg:top-0 translate-x-[-50%] lg:translate-x-0 translate-y-[-50%] lg:translate-y-0 absolute lg:static z-50 items-center text-xl font-semibold  rounded-full duration-500 ${
+            dark ? 'text-[#e9ecef]' : 'text-[#575c5f]'
+          }`}
         >
           <NavLink
             to="/courses"
             className={({ isActive }) =>
               isActive
-                ? 'shadow-lg px-6 text-black shadow-[#cdcecf] duration-700 py-1 rounded-full mx-0 lg:mx-4'
+                ? `shadow-lg px-6 shadow-[#cdcecf] duration-700 py-1 rounded-full mx-0 lg:mx-4`
                 : 'mx-0 lg:mx-4 px-6 py-1'
             }
           >

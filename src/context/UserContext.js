@@ -23,6 +23,8 @@ const githubProvider = new GithubAuthProvider();
 // Context Declaration
 export const AuthContext = createContext({});
 const UserContext = ({ children }) => {
+  // State for dark and light mode
+  const [dark, setDark] = useState(false);
   // State for Category Data
   const [courseCategory, setCourseCategory] = useState([]);
   // State for Category Id
@@ -113,6 +115,8 @@ const UserContext = ({ children }) => {
     setOpen,
     loading,
     setLoading,
+    dark,
+    setDark,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

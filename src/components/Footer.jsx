@@ -1,18 +1,29 @@
 import { Tooltip } from '@material-tailwind/react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '../asset/brand-logo.png';
+import logoWhite from '../asset/brand-logo-white.png';
+import { AuthContext } from '../context/UserContext';
 
 const Footer = () => {
+  const { dark } = useContext(AuthContext);
   return (
-    <footer className="px-4 divide-y bg-[#f1f3f5] text-[#495057] mt-8">
+    <footer
+      className={`px-4 divide-y ${
+        dark ? 'bg-[#343a40] text-[#e9ecef]' : 'bg-[#f1f3f5] text-[#495057]'
+      }`}
+    >
       <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
         <div className="lg:w-1/3">
           <div className="flex justify-center space-x-3 lg:justify-start">
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-violet-400"></div>
             <Link to="/" className="self-center text-2xl font-semibold">
-              <img className="h-10 lg:12 xl:14" src={logo} alt="" />
+              <img
+                className="h-10 lg:12 xl:14"
+                src={dark ? logoWhite : logo}
+                alt=""
+              />
             </Link>
           </div>
         </div>
@@ -68,7 +79,13 @@ const Footer = () => {
                   className="flex items-center p-1"
                   target="_blank"
                 >
-                  <FaFacebook className="text-2xl text-[#868e96] duration-300 hover:text-[#343a40]"></FaFacebook>
+                  <FaFacebook
+                    className={`text-2xl ${
+                      dark
+                        ? 'text-[#e9ecef] hover:text-[#ced4da]'
+                        : 'text-[#868e96] hover:text-[#343a40]'
+                    } duration-300 `}
+                  ></FaFacebook>
                 </a>
               </Tooltip>
               <Tooltip content="Twitter">
@@ -77,7 +94,13 @@ const Footer = () => {
                   className="flex items-center p-1"
                   target="_blank"
                 >
-                  <FaTwitter className="text-2xl text-[#868e96] duration-300 hover:text-[#343a40]"></FaTwitter>
+                  <FaTwitter
+                    className={`text-2xl ${
+                      dark
+                        ? 'text-[#e9ecef] hover:text-[#ced4da]'
+                        : 'text-[#868e96] hover:text-[#343a40]'
+                    } duration-300 `}
+                  ></FaTwitter>
                 </a>
               </Tooltip>
               <Tooltip content="Twitter">
@@ -86,7 +109,13 @@ const Footer = () => {
                   target="_blank"
                   className="flex items-center p-1"
                 >
-                  <FaInstagram className="text-2xl text-[#868e96] duration-300 hover:text-[#343a40]"></FaInstagram>
+                  <FaInstagram
+                    className={`text-2xl ${
+                      dark
+                        ? 'text-[#e9ecef] hover:text-[#ced4da]'
+                        : 'text-[#868e96] hover:text-[#343a40]'
+                    } duration-300 `}
+                  ></FaInstagram>
                 </a>
               </Tooltip>
             </div>
