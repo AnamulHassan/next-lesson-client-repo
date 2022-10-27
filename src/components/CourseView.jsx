@@ -32,8 +32,12 @@ const CourseView = ({ courseData }) => {
       <div className="relative mb-6">
         <img
           className="w-full rounded-t-md bg-[#ced4da]"
-          src={thumbnailUrl}
-          alt=""
+          src={
+            thumbnailUrl
+              ? thumbnailUrl
+              : 'https://imgpile.com/images/TyiwnR.jpg'
+          }
+          alt={courseTitle}
           onError={e =>
             (e.currentTarget.src = 'https://imgpile.com/images/TyiwnR.jpg')
           }
@@ -47,7 +51,7 @@ const CourseView = ({ courseData }) => {
             courseStatus === 'Free' ? 'bg-[#1b4460]' : 'bg-[#27aae2]'
           } text-white text-xl font-bold px-4 tracking-tight py-1 rounded-lg`}
         >
-          {courseStatus}
+          {courseStatus ? courseStatus : 'None'}
         </div>
       </div>
       <div
