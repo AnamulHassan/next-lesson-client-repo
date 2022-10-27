@@ -25,7 +25,14 @@ const router = createBrowserRouter([
       { path: '/home', element: <Home></Home> },
       { path: '/login', element: <Login></Login> },
       { path: '/register', element: <Register></Register> },
-      { path: '/profile', element: <Profile></Profile> },
+      {
+        path: '/profile',
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
       {
         path: '/courses',
         loader: () => fetch('https://next-lesson-server.vercel.app/courses'),
@@ -48,10 +55,6 @@ const router = createBrowserRouter([
         element: <CourseDetails></CourseDetails>,
       },
       {
-        path: '/',
-        element: <CourseView></CourseView>,
-      },
-      {
         path: '/faq',
         element: <FAQ></FAQ>,
       },
@@ -65,7 +68,6 @@ const router = createBrowserRouter([
       },
       { path: '/blog', element: <Blog></Blog> },
       { path: '/about', element: <About></About> },
-      { path: '/premium', element: <Premium></Premium> },
       { path: '/reset_password', element: <ResetPassword></ResetPassword> },
     ],
   },

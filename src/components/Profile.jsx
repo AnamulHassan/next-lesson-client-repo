@@ -85,7 +85,7 @@ const Profile = () => {
       })
       .catch(error => setError(error.message));
   };
-  console.log(user);
+  // console.log(user);
   return (
     <section className="w-[90%] lg:w-4/5 mx-auto border-2 rounded-xl  my-8">
       <div className="bg-[#f4f7fc] flex flex-col lg:flex-row ">

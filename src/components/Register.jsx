@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
@@ -8,6 +8,10 @@ import { useContext } from 'react';
 import toast from 'react-hot-toast';
 
 const Register = () => {
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+  const navigate = useNavigate();
+  console.log(from);
   const {
     createUser,
     updateUserProfile,
@@ -15,6 +19,7 @@ const Register = () => {
     loginWithGoogle,
     loginWithGithub,
     verifyAccount,
+    setLoading,
   } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
@@ -56,8 +61,12 @@ const Register = () => {
         form.reset();
         handleUserInfoUpdate(fullName, photoURL);
         setUser(result.user);
+        navigate(from, { replace: true });
       })
-      .catch(error => setError(error.message));
+      .catch(error => setError(error.message))
+      .finally(() => {
+        setLoading(false);
+      });
   };
   // Update User Profile Function
   const handleUserInfoUpdate = (name, photoURL) => {
@@ -72,8 +81,14 @@ const Register = () => {
   // Login With Google Function
   const handleLoginWithGoogle = () => {
     loginWithGoogle()
-      .then(result => setUser(result.user))
-      .catch(error => setError(error.message));
+      .then(result => {
+        setUser(result.user);
+        navigate(from, { replace: true });
+      })
+      .catch(error => setError(error.message))
+      .finally(() => {
+        setLoading(false);
+      });
   };
   // Account Verification
   const handleVerificationAccount = () => {
@@ -96,8 +111,14 @@ const Register = () => {
   // Login With Github Function
   const handleLoginWithGithub = () => {
     loginWithGithub()
-      .then(result => setUser(result.user))
-      .catch(error => setError(error.message));
+      .then(result => {
+        setUser(result.user);
+        navigate(from, { replace: true });
+      })
+      .catch(error => setError(error.message))
+      .finally(() => {
+        setLoading(false);
+      });
   };
   return (
     <section

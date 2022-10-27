@@ -56,7 +56,10 @@ const Login = () => {
         setUser(result.user);
         navigate(from, { replace: true });
       })
-      .catch(error => setError(error.message));
+      .catch(error => setError(error.message))
+      .finally(() => {
+        setLoading(false);
+      });
   };
   // Login With Github Function
   const handleLoginWithGithub = () => {
@@ -65,7 +68,10 @@ const Login = () => {
         setUser(result.user);
         navigate(from, { replace: true });
       })
-      .catch(error => setError(error.message));
+      .catch(error => setError(error.message))
+      .finally(() => {
+        setLoading(false);
+      });
   };
   return (
     <section
