@@ -28,7 +28,7 @@ const CourseView = ({ courseData }) => {
   // console.log(courseData);
   const { courseTitle, thumbnailUrl, id, courseStatus, atAGlance } = courseData;
   return (
-    <div className="border-2 border-[#ced4da] rounded-lg">
+    <div className="border-2 border-[#f1f3f5] rounded-lg">
       <div className="relative mb-6">
         <img
           className="w-full rounded-t-md bg-[#ced4da]"

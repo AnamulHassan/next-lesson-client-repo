@@ -27,7 +27,7 @@ const Blog = () => {
         {({ toPdf }) => (
           <Tooltip content="Download the file">
             <button
-              className=" h-12 w-12 fixed right-[10%] top-[10%]  bg-[#e9ecef] flex items-center justify-center rounded-full duration-300 hover:bg-[#dee2e6] "
+              className=" h-12 w-12 absolute right-[10%] top-[10%]  bg-[#e9ecef] flex items-center justify-center rounded-full duration-300 hover:bg-[#dee2e6] "
               onClick={toPdf}
             >
               <FaPrint className="text-2xl text-[#495057]" />

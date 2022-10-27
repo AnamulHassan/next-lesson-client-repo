@@ -4,21 +4,21 @@ import Blog from '../components/Blog';
 import CourseDetails from '../components/CourseDetails';
 import Courses from '../components/Courses';
 import CoursesWithCategory from '../components/CoursesWithCategory';
-import CourseView from '../components/CourseView';
 import FAQ from '../components/FAQ';
 import Home from '../components/Home';
 import Login from '../components/Login';
-import Premium from '../components/Premium';
-import PremiumAccess from '../components/CheckOut';
+import CheckOut from '../components/CheckOut';
 import Profile from '../components/Profile';
 import Register from '../components/Register';
 import ResetPassword from '../components/ResetPassword';
 import Main from '../layout/Main';
 import PrivateRoute from './PrivateRoute';
+import ErrorPage from '../components/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
+    errorElement: <ErrorPage></ErrorPage>,
     element: <Main></Main>,
     children: [
       { path: '/', element: <Home></Home> },
@@ -60,14 +60,20 @@ const router = createBrowserRouter([
       },
       {
         path: '/premium',
+        loader: () =>
+          fetch('https://next-lesson-server.vercel.app/category/04'),
         element: (
           <PrivateRoute>
-            <PremiumAccess></PremiumAccess>
+            <CheckOut></CheckOut>
           </PrivateRoute>
         ),
       },
       { path: '/blog', element: <Blog></Blog> },
-      { path: '/about', element: <About></About> },
+      {
+        path: '/about',
+        loader: () => fetch('https://next-lesson-server.vercel.app/about'),
+        element: <About></About>,
+      },
       { path: '/reset_password', element: <ResetPassword></ResetPassword> },
     ],
   },

@@ -4,24 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaUserCircle } from 'react-icons/fa';
 import { HiLightBulb, HiMoon } from 'react-icons/hi';
 import { Tooltip } from '@material-tailwind/react';
-/*
-Navigation color
---------------------------------------
-logo: #575c5f 
-text : #28374a
-login: #27aae2
-bg: #ffffff
-
--------------------------------
-header text:  #ffffff
-hero bg: #1b4460 
-common bg 2 : #f4f7fc 
-common text: #28374a 
-bg up : #f2f7fa  
-button bg: #0071b3   
-button text: #ffffff
-btn bg #8cc63e 
-*/
+import logo from '../asset/brand-logo.png';
 
 const Header = () => {
   const { user } = useContext(AuthContext);
@@ -40,9 +23,7 @@ const Header = () => {
         <div className="">
           <Link className="" to="/">
             <div className="block">
-              <h2 className="text-3xl tracking-tighter font-bold">
-                Next Lesson
-              </h2>
+              <img className="h-10 lg:12 xl:14" src={logo} alt="" />
             </div>
           </Link>
         </div>
