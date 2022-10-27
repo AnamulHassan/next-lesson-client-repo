@@ -4,7 +4,6 @@ import InstructorProfile from './InstructorProfile';
 
 const About = () => {
   const instructorData = useLoaderData();
-  // console.log(instructorData.length);
   return (
     <section
       style={{
