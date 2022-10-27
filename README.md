@@ -1,6 +1,6 @@
 # Next Lesson Project
 
-We made this project to sell some online courses. Making this course I had planned to implement all thing that was provided by my instructor. I gonna note down all these strategies which I followed.
+We made this project to sell some online courses. Making this project I had planned to implement all thing that was provided by my instructor. I'm gonna note down all these strategies which I followed.
 
 - I made a responsive nav bar to navigate my webpage easily. In this nav bar, I also added light and dark mode buttons.
 - I also made a home page to show our main features.
