@@ -13,7 +13,9 @@ const Courses = () => {
     <section className="w-[85%] lg:w-[95%] mt-12 mx-auto flex">
       <div
         className={`w-4/5 lg:w-[25%] z-50 duration-500 fixed lg:static left-2/4 top-2/4 ${
-          open ? 'translate-x-[-350%] scale-[10%]' : 'translate-x-[-50%]'
+          open
+            ? 'translate-x-[-50%]'
+            : 'translate-x-[-350%] scale-[10%] lg:scale-100'
         } translate-y-[-50%] lg:translate-x-0 lg:translate-y-0`}
       >
         <CourseCategory activeBtn={'07'}></CourseCategory>
@@ -29,9 +31,9 @@ const Courses = () => {
       <div className=" left-0 top-0 translate-y-[90%] fixed flex lg:hidden  items-center justify-center  text-gray-400 h-16 w-12 z-50 rounded-lg ">
         <button className="duration-300" onClick={handleNavigateCategory}>
           {open ? (
-            <HiChevronDoubleRight className="text-4xl duration-300 leading-2" />
-          ) : (
             <HiChevronDoubleLeft className="text-4xl  duration-300 leading-2" />
+          ) : (
+            <HiChevronDoubleRight className="text-4xl duration-300 leading-2" />
           )}
         </button>
       </div>

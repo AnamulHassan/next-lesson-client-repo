@@ -5,13 +5,16 @@ import CourseDetails from '../components/CourseDetails';
 import Courses from '../components/Courses';
 import CoursesWithCategory from '../components/CoursesWithCategory';
 import CourseView from '../components/CourseView';
+import FAQ from '../components/FAQ';
 import Home from '../components/Home';
 import Login from '../components/Login';
 import Premium from '../components/Premium';
+import PremiumAccess from '../components/PremiumAccess';
 import Profile from '../components/Profile';
 import Register from '../components/Register';
 import ResetPassword from '../components/ResetPassword';
 import Main from '../layout/Main';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -25,24 +28,40 @@ const router = createBrowserRouter([
       { path: '/profile', element: <Profile></Profile> },
       {
         path: '/courses',
-        loader: () => fetch('http://localhost:5000/courses'),
+        loader: () => fetch('https://next-lesson-server.vercel.app/courses'),
         element: <Courses></Courses>,
       },
       {
         path: '/category/:categoryId',
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.categoryId}`),
+          fetch(
+            `https://next-lesson-server.vercel.app/category/${params.categoryId}`
+          ),
         element: <CoursesWithCategory></CoursesWithCategory>,
       },
       {
         path: '/courses/:courseId',
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/courses/${params.courseId}`),
+          fetch(
+            `https://next-lesson-server.vercel.app/courses/${params.courseId}`
+          ),
         element: <CourseDetails></CourseDetails>,
       },
       {
         path: '/',
         element: <CourseView></CourseView>,
+      },
+      {
+        path: '/faq',
+        element: <FAQ></FAQ>,
+      },
+      {
+        path: '/premium',
+        element: (
+          <PrivateRoute>
+            <PremiumAccess></PremiumAccess>
+          </PrivateRoute>
+        ),
       },
       { path: '/blog', element: <Blog></Blog> },
       { path: '/about', element: <About></About> },

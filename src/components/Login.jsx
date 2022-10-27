@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
@@ -7,7 +7,11 @@ import { AuthContext } from '../context/UserContext';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-  const { signInUser, setUser, loginWithGoogle, loginWithGithub } =
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+  const navigate = useNavigate();
+  console.log(from);
+  const { signInUser, setUser, loginWithGoogle, loginWithGithub, setLoading } =
     useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
@@ -33,8 +37,13 @@ const Login = () => {
           },
         });
         setUser(result.user);
+        navigate(from, { replace: true });
+        form.reset();
       })
-      .catch(error => setError(error.message));
+      .catch(error => setError(error.message))
+      .finally(() => {
+        setLoading(false);
+      });
   };
   // Password Show And Hide Function
   const handleShowPass = () => {
@@ -43,13 +52,19 @@ const Login = () => {
   // Login With Google Function
   const handleLoginWithGoogle = () => {
     loginWithGoogle()
-      .then(result => setUser(result.user))
+      .then(result => {
+        setUser(result.user);
+        navigate(from, { replace: true });
+      })
       .catch(error => setError(error.message));
   };
   // Login With Github Function
   const handleLoginWithGithub = () => {
     loginWithGithub()
-      .then(result => setUser(result.user))
+      .then(result => {
+        setUser(result.user);
+        navigate(from, { replace: true });
+      })
       .catch(error => setError(error.message));
   };
   return (

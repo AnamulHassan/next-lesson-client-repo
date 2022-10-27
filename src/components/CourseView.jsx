@@ -34,6 +34,9 @@ const CourseView = ({ courseData }) => {
           className="w-full rounded-t-md bg-[#ced4da]"
           src={thumbnailUrl}
           alt=""
+          onError={e =>
+            (e.currentTarget.src = 'https://imgpile.com/images/TyiwnR.jpg')
+          }
         />
         <div
           style={{

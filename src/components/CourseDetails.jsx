@@ -25,6 +25,8 @@ const CourseDetails = () => {
     VideoTranscript,
   } = atAGlance;
   // console.log(timeRequire);
+  //   https://imgpile.com/images/TyiwnR.jpg
+  // https://imgpile.com/images/TyiNkr.jpg
   return (
     <section
       style={{
@@ -33,7 +35,14 @@ const CourseDetails = () => {
       className="w-[95%] lg:w-4/5 mx-auto my-8 border-2  border-[#f4f7fc] rounded-xl bg-[#f4f7fc]"
     >
       <div>
-        <img className="w-full rounded-t-xl" src={thumbnailUrl} alt="" />
+        <img
+          className="w-full rounded-t-xl"
+          onError={e =>
+            (e.currentTarget.src = 'https://imgpile.com/images/TyiwnR.jpg')
+          }
+          src={thumbnailUrl}
+          alt=""
+        />
       </div>
       <div className="mt-6 px-4 lg:px-8">
         <h2 className="text-2xl lg:text-4xl font-bold mb-3">{courseTitle}</h2>
@@ -98,6 +107,9 @@ const CourseDetails = () => {
               className="w-[25%] rounded-full"
               src={instructor?.img}
               alt={instructor?.name}
+              onError={e =>
+                (e.currentTarget.src = 'https://imgpile.com/images/TyiNkr.jpg')
+              }
             />
             <p className="text-xl font-bold mt-2">{instructor.name}</p>
           </div>
@@ -125,7 +137,10 @@ const CourseDetails = () => {
               Purchase this Course
             </button>
           )}
-          <Link className="bg-[#f08c00] text-white text-center font-bold text-lg lg:text-2xl px-6 py-2 rounded-md inline-block my-6 duration-300 hover:bg-[#e67700] ">
+          <Link
+            to="/premium"
+            className="bg-[#f08c00] text-white text-center font-bold text-lg lg:text-2xl px-6 py-2 rounded-md inline-block my-6 duration-300 hover:bg-[#e67700] "
+          >
             Get Premium Access
           </Link>
         </div>

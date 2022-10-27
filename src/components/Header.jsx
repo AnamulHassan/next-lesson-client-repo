@@ -3,6 +3,7 @@ import { AuthContext } from '../context/UserContext';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaUserCircle } from 'react-icons/fa';
 import { HiLightBulb, HiMoon } from 'react-icons/hi';
+import { Tooltip } from '@material-tailwind/react';
 /*
 Navigation color
 --------------------------------------
@@ -83,14 +84,14 @@ const Header = () => {
             About
           </NavLink>
           <NavLink
-            to="premium"
+            to="/faq"
             className={({ isActive }) =>
               isActive
                 ? 'shadow-lg shadow-[#cdcecf] duration-700 rounded-full px-6 py-1 '
                 : 'px-6 py-1'
             }
           >
-            Premium
+            FAQ
           </NavLink>
         </div>
 
@@ -117,18 +118,20 @@ const Header = () => {
               <div className="px-1">
                 <div className="">
                   {user?.photoURL ? (
-                    <Link to="/profile">
-                      <img
-                        className=" rounded-full h-9 md:h-10 xl:h-11 w-9 md:w-10 xl:w-11"
-                        src={user?.photoURL}
-                        alt=""
-                        title={user?.displayName}
-                        onError={e =>
-                          (e.currentTarget.src =
-                            'https://cdn-icons-png.flaticon.com/512/219/219983.png')
-                        }
-                      />
-                    </Link>
+                    <Tooltip content={user?.displayName}>
+                      <Link to="/profile">
+                        <img
+                          variant="gradient"
+                          className=" rounded-full h-9 md:h-10 xl:h-11 w-9 md:w-10 xl:w-11"
+                          src={user?.photoURL}
+                          alt=""
+                          onError={e =>
+                            (e.currentTarget.src =
+                              'https://cdn-icons-png.flaticon.com/512/219/219983.png')
+                          }
+                        />
+                      </Link>
+                    </Tooltip>
                   ) : user?.uid ? (
                     <Link to="/profile">
                       <FaUserCircle className="h-9 md:h-12 w-9 md:w-12 hover:text-[#0071b3] text-[#575c5f] border-2 border-[#bcbebf] rounded-full" />

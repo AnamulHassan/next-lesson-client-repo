@@ -3,7 +3,7 @@ import { AuthContext } from '../context/UserContext';
 import { FaShieldAlt, FaUserCircle } from 'react-icons/fa';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Form } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 /*
 Navigation color
@@ -24,6 +24,7 @@ button text: #ffffff
 btn bg #8cc63e 
 */
 const Profile = () => {
+  const navigate = useNavigate();
   const {
     user,
     updateUserProfile,
@@ -73,12 +74,15 @@ const Profile = () => {
             backgroundColor: '#f4f7fc',
           },
         });
+        navigate('/');
       })
       .catch(error => setError(error.message));
   };
   const handleLogoutUser = () => {
     logoutUser()
-      .then(() => {})
+      .then(() => {
+        navigate('/');
+      })
       .catch(error => setError(error.message));
   };
   console.log(user);

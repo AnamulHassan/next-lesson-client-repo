@@ -31,6 +31,8 @@ const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
   // State For Category Navigate
   const [open, setOpen] = useState(false);
+  // State For Loading Data
+  const [loading, setLoading] = useState(true);
   // Create New Account Function
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -49,14 +51,17 @@ const UserContext = ({ children }) => {
 
   // Login With Google Function
   const loginWithGoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
   // const loginWithGithub Function
   const loginWithGithub = () => {
+    setLoading(true);
     return signInWithPopup(auth, githubProvider);
   };
   // Login With Email And Password Function
   const signInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   // Delete User Account Function
@@ -65,6 +70,7 @@ const UserContext = ({ children }) => {
   };
   // Logout User Function
   const logoutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
   // Reset User Password Function
@@ -77,13 +83,13 @@ const UserContext = ({ children }) => {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
-      // console.log(user);
       setUser(user);
+      setLoading(true);
     });
     return () => unsubscribe();
   }, []);
   useEffect(() => {
-    fetch('http://localhost:5000/category')
+    fetch('https://next-lesson-server.vercel.app/category')
       .then(response => response.json())
       .then(data => setCourseCategory(data));
   }, []);
@@ -105,6 +111,8 @@ const UserContext = ({ children }) => {
     setCategoryId,
     open,
     setOpen,
+    loading,
+    setLoading,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
