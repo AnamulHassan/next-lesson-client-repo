@@ -12,7 +12,7 @@ const About = () => {
         style={{
           fontFamily: "'Nunito', sans-serif",
         }}
-        className="w-[90%] mx-auto py-10 my-[-2px]"
+        className="w-[90%] mx-auto py-12 my-[-1px]"
       >
         <div>
           <h2

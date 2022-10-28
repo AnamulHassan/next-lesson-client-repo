@@ -90,21 +90,23 @@ const Header = () => {
 
         <div className="flex justify-end items-center relative">
           <div className="flex items-center justify-center">
-            <button
-              onClick={handleDarkMode}
-              type="button"
-              className={`${
-                dark
-                  ? 'bg-[#575c5f] border-[#f4f7fc]'
-                  : 'bg-white border-[#bcbebf]'
-              } border-2  hover:shadow-lg duration-500 rounded-full py-1 md:py-2 px-2 md:px-3`}
-            >
-              {dark ? (
-                <HiMoon className="h-6 w-6 text-white rounded-full" />
-              ) : (
-                <HiLightBulb className="h-6 w-6 text-[#575c5f] rounded-full" />
-              )}
-            </button>
+            <Tooltip content={`${dark ? 'Dark Mode' : 'Light Mode'}`}>
+              <button
+                onClick={handleDarkMode}
+                type="button"
+                className={`${
+                  dark
+                    ? 'bg-[#575c5f] border-[#f4f7fc]'
+                    : 'bg-white border-[#bcbebf]'
+                } border-2  hover:shadow-lg duration-500 rounded-full py-1 md:py-2 px-2 md:px-3`}
+              >
+                {dark ? (
+                  <HiMoon className="h-6 w-6 text-white rounded-full" />
+                ) : (
+                  <HiLightBulb className="h-6 w-6 text-[#575c5f] rounded-full" />
+                )}
+              </button>
+            </Tooltip>
           </div>
           <div className="block">
             <div className="flex items-center">

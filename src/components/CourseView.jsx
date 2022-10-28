@@ -62,7 +62,7 @@ const CourseView = ({ courseData }) => {
           to={`../../courses/${id}`}
           className={`border-t-2 h-[50px] rounded-b-lg ${
             dark
-              ? 'bg-[#495057] text-[#e9ecef] hover:text-[#dee2e6]'
+              ? 'bg-[#495057] text-[#dee2e6] hover:text-[#fff]'
               : 'bg-[#f1f3f5] text-[#868e96] hover:text-[#1b4460]'
           }  flex items-center justify-between px-8 duration-200 `}
         >

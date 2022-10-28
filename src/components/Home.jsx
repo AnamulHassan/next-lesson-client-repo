@@ -70,7 +70,7 @@ const Home = () => {
             <div>
               <h2
                 className={`text-4xl ${
-                  dark ? 'text-[#e9ecef]' : 'text-[#868e96]'
+                  dark ? 'text-[#e9ecef]' : 'text-[#343a40]'
                 } font-bold mt-5`}
               >
                 For Educators
@@ -90,14 +90,14 @@ const Home = () => {
         </div>
         <div>
           <h2
-            className={`text-5xl xl:text-8xl font-bold ${
+            className={`text-4xl lg:text-6xl font-bold ${
               dark ? 'text-[#e9ecef]' : 'text-[#343a40]'
-            } xl:mt-12  tracking-tighter `}
+            } xl:pt-12 mt-[-2px] tracking-tighter`}
           >
             Enabling transformation
           </h2>
           <p
-            className={`text-lg xl:text-4xl font-semibold leading-6 ${
+            className={`text-xl lg:text-2xl font-semibold leading-6 ${
               dark ? 'text-[#e9ecef]' : 'text-[#868e96]'
             } mt-2 mb-12`}
           >

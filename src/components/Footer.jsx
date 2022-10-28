@@ -12,9 +12,9 @@ const Footer = () => {
     <footer
       className={`px-4 divide-y ${
         dark ? 'bg-[#343a40] text-[#e9ecef]' : 'bg-[#f1f3f5] text-[#495057]'
-      }`}
+      } pb-12`}
     >
-      <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+      <div className="container flex flex-col justify-between mx-auto space-y-8 lg:flex-row lg:space-y-0">
         <div className="lg:w-1/3">
           <div className="flex justify-center space-x-3 lg:justify-start">
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-violet-400"></div>
