@@ -73,7 +73,7 @@ const Profile = () => {
     <section className={`${dark ? 'bg-[#343a40]' : ''} py-12 my-[-1px] `}>
       <section className="w-[90%] lg:w-4/5 mx-auto border-2 rounded-xl">
         <div className="bg-[#f4f7fc] flex flex-col lg:flex-row rounded-xl">
-          <div className="bg-[#ffffff] w-full  lg:w-[30%] rounded-l-xl flex flex-col ">
+          <div className="bg-[#ffffff] w-full  lg:w-[30%] rounded-r-xl lg:rounded-r-none rounded-l-xl flex flex-col ">
             <div className="flex justify-center my-4">
               {user?.photoURL ? (
                 <img

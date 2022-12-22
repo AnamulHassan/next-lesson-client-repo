@@ -60,13 +60,31 @@ const Footer = () => {
             <h3 className="uppercase font-bold ">Developers</h3>
             <ul className="space-y-1">
               <li>
-                <a href="#">Public API</a>
+                <a
+                  href="https://www.google.com/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Public API
+                </a>
               </li>
               <li>
-                <a href="#">Documentation</a>
+                <a
+                  href="https://www.google.com/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Documentation
+                </a>
               </li>
               <li>
-                <a href="#">Guides</a>
+                <a
+                  href="https://www.google.com/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Guides
+                </a>
               </li>
             </ul>
           </div>
@@ -78,6 +96,7 @@ const Footer = () => {
                   href="https://web.facebook.com/?_rdc=1&_rdr"
                   className="flex items-center p-1"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <FaFacebook
                     className={`text-2xl ${
@@ -93,6 +112,7 @@ const Footer = () => {
                   href="https://twitter.com/login?lang=en"
                   className="flex items-center p-1"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <FaTwitter
                     className={`text-2xl ${
@@ -108,6 +128,7 @@ const Footer = () => {
                   href="https://www.instagram.com/"
                   target="_blank"
                   className="flex items-center p-1"
+                  rel="noreferrer"
                 >
                   <FaInstagram
                     className={`text-2xl ${
